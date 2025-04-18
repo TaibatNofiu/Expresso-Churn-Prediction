@@ -1,3 +1,6 @@
+# Upload the dataset
+uploaded_file = st.file_uploader('Desktop/GMC/ML/Expresso_churn_dataset.csv', type = 'csv')
+
 #### Import the libraries
 import pandas as pd
 import streamlit as st
@@ -13,7 +16,7 @@ st.write('This model use LogisticRegression to make prediction')
 st.sidebar.header("Input features for prediction")
 
 # Load the dataset
-data = pd.read_csv(r'Desktop/GMC/ML/Expresso_churn_dataset.csv')
+data = pd.read_csv(uploaded_file)
 expresso_df = data.drop(columns = ['user_id', 'MONTANT', 'DATA_VOLUME', 'ARPU_SEGMENT', 'ORANGE', 'TIGO', 'ZONE1', 'ZONE2'])
 expresso_df = expresso_df.dropna(thresh=int(0.7 * expresso_df.shape[1]), axis=0)
 expresso_df['REGION'].fillna(expresso_df['REGION'].mode()[0], inplace = True)
