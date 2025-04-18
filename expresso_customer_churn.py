@@ -13,7 +13,7 @@ st.write('This model use LogisticRegression to make prediction')
 st.sidebar.header("Input features for prediction")
 
 # Upload the dataset
-uploaded_file = st.file_uploader("C:\Users\AMOKE\Desktop\GMC\ML\Expresso_churn_dataset.zip")
+uploaded_file = st.file_uploader("Desktop\GMC\ML\Expresso_churn_dataset.zip")
 # Load the dataset
 data = pd.read_csv(uploaded_file, compression='zip')
 expresso_df = data.drop(columns = ['user_id', 'MONTANT', 'DATA_VOLUME', 'ARPU_SEGMENT', 'ORANGE', 'TIGO', 'ZONE1', 'ZONE2'])
