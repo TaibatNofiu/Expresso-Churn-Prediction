@@ -13,7 +13,7 @@ st.write('This model use LogisticRegression to make prediction')
 st.sidebar.header("Input features for prediction")
 
 # Upload the dataset
-url = 'https://drive.google.com/file/d/1bZ5ZgMwGCQRTRWaIZH0r-aVB2k2cOslJ/view?usp=sharing'
+url = 'https://drive.google.com/file/d/1bZ5ZgMwGCQRTRWaIZH0r-aVB2k2cOslJ'
 # Load the dataset
 data = pd.read_csv(url)
 expresso_df = data.drop(columns = ['user_id', 'MONTANT', 'DATA_VOLUME', 'ARPU_SEGMENT', 'ORANGE', 'TIGO', 'ZONE1', 'ZONE2'])
