@@ -15,7 +15,7 @@ st.sidebar.header("Input features for prediction")
 # Upload the dataset
 url = 'https://drive.google.com/file/d/1bZ5ZgMwGCQRTRWaIZH0r-aVB2k2cOslJ'
 # Load the dataset
-data = pd.read_csv(url)
+data = pd.read_csv(url, compression='zip')
 expresso_df = data.drop(columns = ['user_id', 'MONTANT', 'DATA_VOLUME', 'ARPU_SEGMENT', 'ORANGE', 'TIGO', 'ZONE1', 'ZONE2'])
 expresso_df = expresso_df.dropna(thresh=int(0.7 * expresso_df.shape[1]), axis=0)
 expresso_df['REGION'].fillna(expresso_df['REGION'].mode()[0], inplace = True)
