@@ -63,7 +63,7 @@ freq_top_pack = st.sidebar.slider('Freq Top Pack',
                               float(expresso_df['FREQ_TOP_PACK'].max()))
 top_pack = st.sidebar.selectbox('Top Pack', expresso_df['TOP_PACK'].unique())
 # Select the columns to be used for modeling
-express_df = expresso_df[['REGION', 'FREQUENCE_RECH', 'REVENUE', 'FREQUENCE', 'ON_NET', 'REGULARITY', 'FREQ_TOP_PACK', 'TOP_PACK', 'CHURN']]
+express_df = expresso_df[['REGION', 'TENURE', 'FREQUENCE_RECH', 'REVENUE', 'FREQUENCE', 'ON_NET', 'REGULARITY', 'FREQ_TOP_PACK', 'TOP_PACK', 'CHURN']]
 # Encode the categorical features
 encode_data = pd.get_dummies(express_df, columns = express_df.select_dtypes(include = 'object').columns)
 
