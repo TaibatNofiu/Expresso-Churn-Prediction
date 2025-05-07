@@ -17,6 +17,7 @@ st.sidebar.header("Input features for prediction")
 @st.cache_data
 def load_data():
     url = "https://drive.google.com/uc?id=1h_dzCN7rbOspMJcM-N_GyPhJWpLxsAZr"
+    output = "expresso_dataset.csv"
     gdown.download(url, output, quiet=False)
     data = pd.read_csv(output)
     data.columns = data.columns.str.strip()
