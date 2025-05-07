@@ -17,6 +17,8 @@ file_id = "1bZ5ZgMwGCQRTRWaIZH0r-aVB2k2cOslJ"
 url = f"https://drive.google.com/uc?export=download&id={file_id}"
 # Load the dataset
 data = pd.read_csv(url)
+# Strip empty spaces from the columns
+data.columns = data.columns.str.strip()
 expresso_df = data.drop(columns = ['user_id', 'MONTANT', 'DATA_VOLUME', 'ARPU_SEGMENT', 'ORANGE', 'TIGO', 'ZONE1', 'ZONE2'])
 expresso_df = expresso_df.dropna(thresh=int(0.7 * expresso_df.shape[1]), axis=0)
 expresso_df['REGION'].fillna(expresso_df['REGION'].mode()[0], inplace = True)
