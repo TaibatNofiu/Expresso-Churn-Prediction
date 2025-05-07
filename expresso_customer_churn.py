@@ -76,7 +76,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, rando
 
 
 # Fit smote data
-@st.cache_resource
+@st.cache_data
 def train_model(X, y):
     # Instantiate SMOTE
     smote = SMOTE(k_neighbors = 3, random_state = 42)
