@@ -2,6 +2,7 @@
 import pandas as pd
 import streamlit as st
 import numpy as np
+import gdown
 from sklearn.linear_model import LogisticRegression
 from imblearn.over_sampling import SMOTE
 from sklearn.model_selection import train_test_split
@@ -16,21 +17,13 @@ st.sidebar.header("Input features for prediction")
 #file_id = "1bZ5ZgMwGCQRTRWaIZH0r-aVB2k2cOslJ"
 url = "https://drive.google.com/uc?id=1h_dzCN7rbOspMJcM-N_GyPhJWpLxsAZr"
 # Load the dataset
-data = pd.read_csv(url, on_bad_lines = 'skip')
-from scipy import stats
-numerical_columns = data.select_dtypes(include = ['int', 'float']).columns
-z_scores = stats.zscore(data[numerical_columns])
-outliers = (abs(z_scores) > 3)  # Threshold of 3 standard deviations
-# IQR method (robust to non-normal distributions)
-Q1 = data[numerical_columns].quantile(0.25)
-Q3 = data[numerical_columns].quantile(0.75)
-IQR = Q3 - Q1
-outliers_iqr = ((data[numerical_columns] < (Q1 - 1.5*IQR)) | ((data[numerical_columns] > (Q3 + 1.5*IQR))))
-# Remove outliers
-expresso_df = data[~outliers_iqr.any(axis=1)]
-# Strip empty spaces from the columns
-expresso_df.columns = expresso_df.columns.str.strip()
-st.write('Columns in the data', data.columns.tolist())
+@st.cache_data
+def load_data():
+    url = f"https://drive.google.com/uc?id={file_id}"
+    gdown.download(url, output, quiet=False)
+    data = pd.read_csv(output)
+    data.columns = data.columns.str.strip()
+    return data
 expresso_df = data.drop(columns = ['user_id', 'MONTANT', 'DATA_VOLUME', 'ARPU_SEGMENT', 'ORANGE', 'TIGO', 'ZONE1', 'ZONE2'])
 expresso_df = expresso_df.dropna(thresh=int(0.7 * expresso_df.shape[1]), axis=0)
 expresso_df['REGION'].fillna(expresso_df['REGION'].mode()[0], inplace = True)
