@@ -7,7 +7,7 @@ from imblearn.over_sampling import SMOTE
 from sklearn.model_selection import train_test_split
 
 st.title('Expresso Customers Churn Prediction')
-st.write('This model use LogisticRegression to make prediction')
+st.write('This model use LogisticRegression to make prediction', data)
 
 # Create user input (widgets)
 st.sidebar.header("Input features for prediction")
@@ -19,6 +19,7 @@ url = f"https://drive.google.com/uc?export=download&id={file_id}"
 data = pd.read_csv(url)
 # Strip empty spaces from the columns
 data.columns = data.columns.str.strip()
+st.write('Columns in the data', data.columns.tolist())
 expresso_df = data.drop(columns = ['user_id', 'MONTANT', 'DATA_VOLUME', 'ARPU_SEGMENT', 'ORANGE', 'TIGO', 'ZONE1', 'ZONE2'])
 expresso_df = expresso_df.dropna(thresh=int(0.7 * expresso_df.shape[1]), axis=0)
 expresso_df['REGION'].fillna(expresso_df['REGION'].mode()[0], inplace = True)
