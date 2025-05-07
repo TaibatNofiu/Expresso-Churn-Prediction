@@ -22,6 +22,7 @@ def load_data():
     data = pd.read_csv(output)
     data.columns = data.columns.str.strip()
     return data
+data = load_data()
 expresso_df = data.drop(columns = ['user_id', 'MONTANT', 'DATA_VOLUME', 'ARPU_SEGMENT', 'ORANGE', 'TIGO', 'ZONE1', 'ZONE2'])
 expresso_df = expresso_df.dropna(thresh=int(0.7 * expresso_df.shape[1]), axis=0)
 expresso_df['REGION'].fillna(expresso_df['REGION'].mode()[0], inplace = True)
@@ -34,7 +35,7 @@ expresso_df['FREQ_TOP_PACK'].fillna(expresso_df['FREQ_TOP_PACK'].median(), inpla
 expresso_df['Churn_name'] = np.where(expresso_df['CHURN'] == 0, 'No', 'Yes')
 
 # Display the dataset
-st.write('Expresso Customers Churn', expresso_df.sample(100))
+st.write('Expresso Customers Churn', expresso_df.head(50))
 
 # The features
 region = st.sidebar.selectbox('Region', expresso_df['REGION'].unique())
