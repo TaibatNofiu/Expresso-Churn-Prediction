@@ -25,13 +25,13 @@ def load_data():
 data = load_data()
 expresso_df = data.drop(columns = ['user_id', 'MONTANT', 'DATA_VOLUME', 'ARPU_SEGMENT', 'ORANGE', 'TIGO', 'ZONE1', 'ZONE2'])
 expresso_df = expresso_df.dropna(thresh=int(0.7 * expresso_df.shape[1]), axis=0)
-expresso_df['REGION'].fillna(expresso_df['REGION'].mode()[0], inplace = True)
-expresso_df['FREQUENCE_RECH'].fillna(expresso_df['FREQUENCE_RECH'].mean(), inplace = True)
+expresso_df['REGION'] = expresso_df['REGION'].fillna(expresso_df['REGION'].mode()[0])
+expresso_df['FREQUENCE_RECH'] = expresso_df['FREQUENCE_RECH'].fillna(expresso_df['FREQUENCE_RECH'].mean())
 expresso_df.dropna(inplace = True, subset = ['REVENUE'])
 expresso_df.dropna(inplace = True, subset = ['FREQUENCE'])
-expresso_df['ON_NET'].fillna(expresso_df['ON_NET'].mean(), inplace = True)
-expresso_df['TOP_PACK'].fillna(expresso_df['TOP_PACK'].mode()[0], inplace = True)
-expresso_df['FREQ_TOP_PACK'].fillna(expresso_df['FREQ_TOP_PACK'].median(), inplace = True)
+expresso_df['ON_NET'] = expresso_df['ON_NET'].fillna(expresso_df['ON_NET'].mean())
+expresso_df['TOP_PACK'] = expresso_df['TOP_PACK'].fillna(expresso_df['TOP_PACK'].mode()[0])
+expresso_df['FREQ_TOP_PACK'] = expresso_df['FREQ_TOP_PACK'].fillna(expresso_df['FREQ_TOP_PACK'].median())
 expresso_df['Churn_name'] = np.where(expresso_df['CHURN'] == 0, 'No', 'Yes')
 
 # Display the dataset
