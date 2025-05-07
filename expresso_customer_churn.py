@@ -61,10 +61,11 @@ freq_top_pack = st.sidebar.slider('Freq Top Pack',
                               float(expresso_df['FREQ_TOP_PACK'].min()),
                               float(expresso_df['FREQ_TOP_PACK'].mean()),
                               float(expresso_df['FREQ_TOP_PACK'].max()))
-
-# Select
+top_pack = st.sidebar.selectbox('Top Pack', expresso_df['TOP_PACK'].unique())
+# Select the columns to be used for modeling
+express_df = expresso_df[['REGION', 'FREQUENCE_RECH', 'REVENUE', 'FREQUENCE', 'ON_NET', 'REGULARITY', 'FREQ_TOP_PACK', 'TOP_PACK', 'CHURN']]
 # Encode the categorical features
-encode_data = pd.get_dummies(expresso_df, columns = expresso_df.select_dtypes(include = 'object').columns)
+encode_data = pd.get_dummies(express_df, columns = express_df.select_dtypes(include = 'object').columns)
 
 # split the data into X and y and also into train and test
 # Features (X) and target(y)
@@ -73,7 +74,6 @@ y = encode_data['CHURN']
 
 # Train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42)
-
 
 # Fit smote data
 @st.cache_data
@@ -89,12 +89,12 @@ def train_model(X, y):
 train = train_model(X_train, y_train)
 
 # Predict the data
-result = X_test.copy()
-predict = train.predict(X_test)
-result['Predicted Churn'] = predict
-result['Predicted Label'] = np.where(predict == 0, 'No', 'Yes')
-st.subheader('Predictions')
-st.write(result.head())
+# result = X_test.copy()
+# predict = train.predict(X_test)
+# result['Predicted Churn'] = predict
+# result['Predicted Label'] = np.where(predict == 0, 'No', 'Yes')
+# st.subheader('Predictions')
+# st.write(result.head())
 
 # Prepare a dataframe
 user_input = pd.DataFrame({
@@ -106,7 +106,7 @@ user_input = pd.DataFrame({
     'ON_NET': [on_net],
     'REGULARITY': [regular],
     'FREQ_TOP_PACK': [freq_top_pack],
-    'TOP_PACK': [expresso_df['TOP_PACK'].mode()[0]]  # or allow user to choose
+    'TOP_PACK': top_pack  # or allow user to choose
 })
 
 # Encode user_input to match training data
