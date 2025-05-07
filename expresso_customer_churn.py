@@ -8,18 +8,15 @@ from imblearn.over_sampling import SMOTE
 from sklearn.model_selection import train_test_split
 
 st.title('Expresso Customers Churn Prediction')
-st.write('This model use LogisticRegression to make prediction', data)
+st.write('This model use LogisticRegression to make prediction')
 
 # Create user input (widgets)
 st.sidebar.header("Input features for prediction")
 
-# Upload the dataset
-#file_id = "1bZ5ZgMwGCQRTRWaIZH0r-aVB2k2cOslJ"
-url = "https://drive.google.com/uc?id=1h_dzCN7rbOspMJcM-N_GyPhJWpLxsAZr"
 # Load the dataset
 @st.cache_data
 def load_data():
-    url = f"https://drive.google.com/uc?id={file_id}"
+    url = "https://drive.google.com/uc?id=1h_dzCN7rbOspMJcM-N_GyPhJWpLxsAZr"
     gdown.download(url, output, quiet=False)
     data = pd.read_csv(output)
     data.columns = data.columns.str.strip()
