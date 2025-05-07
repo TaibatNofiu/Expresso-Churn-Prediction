@@ -13,8 +13,8 @@ st.write('This model use LogisticRegression to make prediction', data)
 st.sidebar.header("Input features for prediction")
 
 # Upload the dataset
-file_id = "1bZ5ZgMwGCQRTRWaIZH0r-aVB2k2cOslJ"
-url = f"https://drive.google.com/uc?export=download&id={file_id}"
+#file_id = "1bZ5ZgMwGCQRTRWaIZH0r-aVB2k2cOslJ"
+url = "https://drive.google.com/uc?id=1h_dzCN7rbOspMJcM-N_GyPhJWpLxsAZr"
 # Load the dataset
 data = pd.read_csv(url)
 # Strip empty spaces from the columns
