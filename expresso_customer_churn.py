@@ -76,7 +76,7 @@ y = encode_data['CHURN']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42)
 
 # Fit smote data
-@st.cache_data
+@st.cache_resource
 def train_model(X, y):
     # Instantiate SMOTE
     smote = SMOTE(k_neighbors = 3, random_state = 42)
@@ -86,7 +86,7 @@ def train_model(X, y):
     logreg = LogisticRegression()
     logreg.fit(X_smote, y_smote)
     return logreg
-train = train_model(X_train, y_train)
+model = train_model(X_train, y_train)
 
 # Prepare a dataframe
 user_input = pd.DataFrame({
@@ -106,7 +106,7 @@ user_input_encoded = pd.get_dummies(user_input, columns = user_input.select_dtyp
 user_input_encoded = user_input_encoded.reindex(columns = X.columns, fill_value = 0)
 
 # Predict user_input
-user_prediction = train.predict(user_input_encoded)[0]
+user_prediction = model.predict(user_input_encoded)[0]
 label = 'No' if user_prediction == 0 else 'Yes'
 st.subheader('User Prediction')
 st.success(f'The probability that the customer is likely to churn is {label}')
