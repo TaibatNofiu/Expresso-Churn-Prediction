@@ -88,14 +88,6 @@ def train_model(X, y):
     return logreg
 train = train_model(X_train, y_train)
 
-# Predict the data
-# result = X_test.copy()
-# predict = train.predict(X_test)
-# result['Predicted Churn'] = predict
-# result['Predicted Label'] = np.where(predict == 0, 'No', 'Yes')
-# st.subheader('Predictions')
-# st.write(result.head())
-
 # Prepare a dataframe
 user_input = pd.DataFrame({
     'REGION': [region],
