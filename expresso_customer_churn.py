@@ -7,7 +7,7 @@ st.title('Expresso Customers Churn Prediction')
 st.write('This model use LogisticRegression to make prediction')
 
 # download model
-model = joblib.load("expressomodel.pkl"))
+model = joblib.load("expressomodel.pkl")
 features = joblib.load("features.pkl")
 
 # Create user input (widgets)
