@@ -7,8 +7,8 @@ st.title('Expresso Customers Churn Prediction')
 st.write('This model use LogisticRegression to make prediction')
 
 # download model
-model = joblib.load("https://github.com/TaibatNofiu/Expresso-Churn-Prediction/blob/main/expressomodel.pkl")
-features = joblib.load("https://github.com/TaibatNofiu/Expresso-Churn-Prediction/blob/main/features.pkl")
+model = joblib.load("expressomodel.pkl"))
+features = joblib.load("features.pkl")
 
 # Create user input (widgets)
 st.header("Input features for prediction")
@@ -57,12 +57,3 @@ if st.button('Predict'):
         st.success(f'The probability that the customer will leave is {pred_prob[0][1] * 100:.2f}%')
     else:
         st.success(f'The probability that the customer will stay {pred_prob[0][0] * 100:.2f}%')
-# Encode user_input to match training data
-user_input_encoded = pd.get_dummies(user_input, columns = user_input.select_dtypes(include = 'object').columns)
-user_input_encoded = user_input_encoded.reindex(columns = X.columns, fill_value = 0)
-
-# Predict user_input
-user_prediction = model.predict(user_input_encoded)[0]
-label = 'No' if user_prediction == 0 else 'Yes'
-st.subheader('User Prediction')
-st.success(f'The probability that the customer is likely to churn is {label}')
